@@ -1,0 +1,38 @@
+#!/bin/zsh
+
+set -e
+
+if [ $# -lt 1 ]; then
+  echo ""
+  echo "Error: Remote name is required"
+  echo "Usage: syncrepo <remote>"
+  echo ""
+  exit 1
+fi
+
+REMOTE="$1"
+REPO_URL=$(git config remote.${REMOTE}.url || echo "")
+
+if [ -z "$REPO_URL" ]; then
+  echo "Remote '$REMOTE' doesn't exists"
+  vared -p "Insert '$REMOTE' url: " REPO_URL
+  echo ""
+  echo "==> Adding remote '$REMOTE' -> '$REPO_URL'"
+  git remote add $REMOTE $REPO_URL
+fi
+
+
+echo ""
+echo "Pooling from '$REMOTE' to local"
+git pull $REMOTE master
+
+echo ""
+echo "Pushing to origin"
+git push origin
+
+echo ""
+echo "==> Pushing to '$REMOTE'"
+git push $REMOTE master:master
+
+exit 0
+

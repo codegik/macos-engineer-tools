@@ -1,0 +1,71 @@
+#!/bin/sh
+
+log() {
+  date=$(date '+%Y-%m-%d %H:%M:%S')
+  echo "[MACOS ENG TOOLS $date] ==> $1"
+}
+
+# get absolute directory of this script
+BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+log "Installing zsh"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+log "Installing homebrew"
+which -s brew
+if [[ $? != 0 ]] ; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew tap homebrew/cask
+fi
+
+brew update
+brew cleanup
+brew install git
+brew install wget
+
+log "Installing sdkman and java world"
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java
+sdk install maven
+sdk install grails
+
+log "Installing nvm and nodejs"
+brew install nvm
+source $(brew --prefix nvm)/nvm.sh
+nvm install node
+
+xcode-select --install
+
+log "Installing my custom alias and scripts"
+grep -Fxq "source $BASEDIR/scripts/main" ~/.zshrc
+if [[ $? != 0 ]] ; then
+    chmod +x $BASEDIR/scripts/*
+    echo "" >> ~/.zshrc
+    echo "# Load personal scripts" >> ~/.zshrc
+    echo "source $BASEDIR/scripts/main" >> ~/.zshrc
+    echo "export PATH=$PATH:$BASEDIR/scripts" >> ~/.zshrc
+    source ~/.zshrc
+fi
+
+log "Installing basic applications"
+brew install --cask firefox
+brew install --cask iterm2
+brew install --cask keka
+brew install --cask spotify
+brew install --cask vlc
+brew install --cask franz
+brew install --cask virtualbox
+brew install --cask xmind
+brew install --cask visual-studio-code
+brew install --cask fork
+brew install --cask notion
+brew install --cask google-chrome
+brew install --cask discord
+brew install --cask postman
+brew install --cask intellij-idea
+brew install awscli
+brew install neovim
+
+exit 0
+

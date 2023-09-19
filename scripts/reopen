@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+set -e
+
+if [ $# -lt 1 ]; then
+  echo ""
+  echo "Error: Process name is required"
+  echo "Usage: reopen <process-name>"
+  echo ""
+  exit 1
+fi
+
+PROCESS="$1"
+COUNT=$(ps -e -o comm |grep "$PROCESS" |wc -l)
+
+if [ $COUNT -gt 1 ]; then
+  echo ""
+  echo "===> Found these processes, choose one to reopen"
+  ps -e -o pid,comm |grep "$PROCESS"
+  read "REPLY?Enter PID to reopen: "
+  PID="$REPLY"
+else
+  PID=$(ps -e -o pid,comm |grep "$PROCESS" |awk '{print $1}')
+fi
+
+
+echo ""
+echo "===> Found PID $PID"
+
+APP=$(ps -e -o comm |grep "$PROCESS" |head -1 |grep -Eo "^([^\.]+)\.app")
+echo "===> Reopening APP $APP"
+kill -9 $PID && sleep 4 && open "$APP"
+
+exit 0
+

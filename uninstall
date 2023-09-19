@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# get absolute directory of this script
+BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+# TODO: remove initial script from ~/.zshrc
+
+
+exit 0
