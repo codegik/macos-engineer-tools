@@ -63,7 +63,7 @@ brew install --cask notion
 brew install --cask google-chrome
 brew install --cask discord
 brew install --cask postman
-brew install --cask intellij-idea
+brew install --cask intellij-idea-ce
 brew install awscli
 brew install neovim
 brew install pyenv
