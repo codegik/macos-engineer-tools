@@ -13,7 +13,7 @@ This script will install the following tools:
 - Homebrew as default package manager
 
 ### Environment tools
-- Git, Wget, SDKMan, Java, Maven, Grails, Nvm, Node, virtualbox, Iterm2
+- Git, Wget, SDKMan, Nvm, pyenv, Java, Maven, Grails, Node, virtualbox, Iterm2
 
 ### Development tools
 - VSCode, neovim, awscli, postman, Intellij, fork

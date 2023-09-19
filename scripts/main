@@ -11,10 +11,23 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 
 ####### load scripts here #######
+
+# Node
 source $(brew --prefix nvm)/nvm.sh
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# Python
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# Ruby
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+
 ####### define aliases here #######
+
 alias processOnPort='pp(){ sudo lsof -nP -iTCP:$1 | grep LISTEN}; pp'
 alias idea='${BASEDIR}/idea $1'
 alias sqlworkbenchj='java -jar /Applications/sqlworkbench.jar &'
