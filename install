@@ -45,8 +45,15 @@ if [[ $? != 0 ]] ; then
     echo "# Load personal scripts" >> ~/.zshrc
     echo "source $BASEDIR/scripts/main" >> ~/.zshrc
     echo "export PATH=$PATH:$BASEDIR/scripts" >> ~/.zshrc
-    source ~/.zshrc
 fi
+
+"Installing custom scripts"
+TEAM_SCRIPT_NAME="team-commits"
+TEAM_SCRIPT_DIR="/usr/local/bin"
+curl https://raw.githubusercontent.com/codegik/github-team-track/256034d423532652d4be963aab1a5eb89813cd5d/$TEAM_SCRIPT_NAME > $TEAM_SCRIPT_DIR/$TEAM_SCRIPT_NAME
+chmod +x $TEAM_SCRIPT_DIR/$TEAM_SCRIPT_NAME
+source $HOME/.zshrc
+
 
 log "Installing basic applications"
 brew install --cask firefox
@@ -69,4 +76,5 @@ brew install neovim
 brew install pyenv
 
 exit 0
+
 

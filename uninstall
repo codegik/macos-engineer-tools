@@ -5,5 +5,6 @@ BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # TODO: remove initial script from ~/.zshrc
 
+rm -rf /usr/local/bin/team-commits
 
 exit 0
