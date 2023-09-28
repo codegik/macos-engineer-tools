@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+set -e
+
+INDEX=$(yabai -m query --spaces --space | jq -r '.index')
+
+yabai -m config --space $INDEX layout stack
+
+exit 0
+
