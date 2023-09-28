@@ -3,7 +3,7 @@
 set -e
 
 TYPE=$(yabai -m query --spaces --space | jq -r '.type')
-NEW_TYPE=$([[ "$TYPE" == "bsp" ]] && echo "stack" || echo "bsp")
+NEW_TYPE=$([[ "$TYPE" == "float" ]] && echo "stack" || echo "float")
 INDEX=$(yabai -m query --spaces --space | jq -r '.index')
 
 yabai -m config --space $INDEX layout $NEW_TYPE
