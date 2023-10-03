@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+set -e
+
+BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+cd $BASEDIR
+cp -r $HOME/.config/skhd $BASEDIR/config/
+cp -r $HOME/.config/yabai $BASEDIR/config/
+
+git pull
+git add .
+git commit -m "updating config files from system"
+git push
+
+cd -
+
+exit 0
+
