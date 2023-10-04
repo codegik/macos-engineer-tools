@@ -5,13 +5,14 @@ set -e
 REPODIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P ; cd .. )"
 REPODIR="$(dirname "$REPODIR")"
 
+cd $REPODIR
+git pull
+
 echo ">> Copying $HOME/.config/skhd"
 cp -r $HOME/.config/skhd $REPODIR/config/
 echo ">> Copying $HOME/.config/yabai"
 cp -r $HOME/.config/yabai $REPODIR/config/
 
-cd $REPODIR
-git pull
 git add .
 git commit -m "updating config files from system"
 git push
