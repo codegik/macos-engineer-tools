@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+set -e
+
+REPODIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P ; cd .. )"
+REPODIR="$(dirname "$REPODIR")"
+
+echo ">> Copying $REPODIR/config/* to $HOME/.config/"
+cp -r $REPODIR/config/* $HOME/.config/
+
+exit 0
+
