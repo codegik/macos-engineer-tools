@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+set -e
+
+APPS=("${(@f)$(yabai -m rule --list |jq -r '.[] |.app')}")
+SPACES=("${(@f)$(yabai -m rule --list |jq -r '.[] |.space')}")
+
+for ((i = 0; i < ${#APPS[@]}; i++)); do
+  APP=${APPS[i]}
+  SPACE=${SPACES[i]}
+
+  if [[ ! -z "$APP" ]]; then
+    if [[ "$SPACE" -gt 0 ]]; then
+      IDS=($(yabai -m query --windows |jq -r --arg APP "$APP" '.[] |select(.app |match($APP)) |.id'))
+     
+      echo "app $APP -> ${IDS[@]}"
+
+      for ID in ${IDS[@]}; do
+        echo "moving $APP ($ID) to space $SPACE"
+        yabai -m window $ID --space $SPACE
+      done
+    fi
+  fi
+done
+
+exit 0
+
