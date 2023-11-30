@@ -74,6 +74,7 @@ brew install --cask intellij-idea-ce
 brew install awscli
 brew install neovim
 brew install pyenv
+brew install ripgrep
 
 exit 0
 
