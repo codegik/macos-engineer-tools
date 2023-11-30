@@ -75,6 +75,7 @@ brew install awscli
 brew install neovim
 brew install pyenv
 brew install ripgrep
+brew install jdtls
 
 exit 0
 
