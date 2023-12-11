@@ -9,8 +9,13 @@ set -e
 REPODIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P ; cd .. )"
 REPODIR="$(dirname "$REPODIR")"
 
+cd $REPODIR
+git pull
+
 echo ">> Copying $REPODIR/config/* to $HOME/.config/"
 cp -r $REPODIR/config/* $HOME/.config/
+
+cd -
 
 exit 0
 
