@@ -14,6 +14,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Node
 source $(brew --prefix nvm)/nvm.sh
+
+# sdkman
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Python
@@ -34,3 +36,4 @@ alias sqlworkbenchj='java -jar /Applications/sqlworkbench.jar &'
 alias g='git'
 alias 101='one(){ cd $HOME/sources/private/101s && ./101 $1 $2 && cd -}; one'
 alias v='nvim'
+
