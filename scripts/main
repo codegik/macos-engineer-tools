@@ -8,7 +8,8 @@ BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 ####### put environment variables here #######
 export NVM_DIR=~/.nvm
 export SDKMAN_DIR="$HOME/.sdkman"
-
+export MVNW_USERNAME=$(sed -n 's,.*<username>\(.*\)</username>.*,\1,p' ~/.m2/settings.xml)
+export MVNW_PASSWORD=$(sed -n 's,.*<password>\(.*\)</password>.*,\1,p' ~/.m2/settings.xml)
 
 ####### load scripts here #######
 
