@@ -31,25 +31,20 @@ yabai -m mouse_drop_action swap
 
 # disable specific apps
 yabai -m rule --add app="^System Preferences$" manage=off
-yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Zscaler$" manage=off
-yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="^Reminder$" manage=off
+
 
 yabai -m rule --add app="^IntelliJ IDEA$" space=^1
 
 yabai -m rule --add app="^Firefox$" space=^2
-yabai -m rule --add app="^Chrome$" space=^2
 
 yabai -m rule --add app="^Slack$" space=^3
-yabai -m rule --add app="^Franz$" space=^3
 
 yabai -m rule --add app="^Microsoft Outlook$" space=^4
-yabai -m rule --add app="^Mail$" space=^4
-yabai -m rule --add app="^Calendar$" space=^4
 
 yabai -m rule --add app="^Fork$" space=^5
 yabai -m rule --add app="^WbStarter$" space=^5
