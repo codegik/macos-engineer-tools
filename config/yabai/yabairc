@@ -1,6 +1,6 @@
 # default layout (can be bsp, tack or float)
-yabai -m config layout stack
-yabai -m config --space 6 layout bsp
+yabai -m config layout bsp
+# yabai -m config --space 2 layout bsp
 
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
@@ -43,6 +43,7 @@ yabai -m rule --add app="^IntelliJ IDEA$" space=^1
 yabai -m rule --add app="^Firefox$" space=^2
 
 yabai -m rule --add app="^Slack$" space=^3
+yabai -m rule --add app="^Code$" space=^3
 
 yabai -m rule --add app="^Microsoft Outlook$" space=^4
 
@@ -53,6 +54,4 @@ yabai -m rule --add app="^Postman$" space=^5
 yabai -m rule --add app="^iTerm2$" space=^6
 
 yabai -m rule --add app="^Spotify$" space=^7
-yabai -m rule --add app="^Finder$" space=^7
-yabai -m rule --add app="^Code$" space=^7
 
