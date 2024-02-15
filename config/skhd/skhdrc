@@ -60,13 +60,8 @@ ctrl + alt - left : yabai -m window --resize left:-20:0 || yabai -m window --res
 ctrl + alt - e : yabai -m space --balance
 
 # move window to display left and right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
-
-
-# move window to prev and next space
-shift + alt - p : yabai -m window --space prev
-shift + alt - n : yabai -m window --space next
+shift + alt - p : yabai -m window --display west; yabai -m display --focus west;
+shift + alt - n : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to space #
 shift + alt - 1 : yabai -m window --space 1 --focus
@@ -93,8 +88,6 @@ ctrl + alt - r : brew services restart yabai
 ctrl + alt + cmd - i : ~/sources/macos-engineer-tools/scripts/reopen "macOS InstantView" 
 ctrl + alt + cmd - w : open /Applications/sqlworkbench.jar
 
-ctrl + alt + cmd - t : yabai -m window --stack next
 cmd - tab : ~/sources/macos-engineer-tools/scripts/yabai-next-window
-alt - tab : ~/sources/macos-engineer-tools/scripts/yabai-next-window-stack
 
 
