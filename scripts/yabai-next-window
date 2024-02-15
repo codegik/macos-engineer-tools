@@ -2,7 +2,7 @@
 
 set -e
 
-yabai -m window --focus next || yabai -m window --focus first
+yabai -m window --focus stack.next || yabai -m window --focus stack.first || yabai -m window --focus next || yabai -m window --focus first
 
 exit 0
 
