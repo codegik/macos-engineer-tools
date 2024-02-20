@@ -88,6 +88,8 @@ ctrl + alt - r : brew services restart yabai
 ctrl + alt + cmd - i : ~/sources/macos-engineer-tools/scripts/reopen "macOS InstantView" 
 ctrl + alt + cmd - w : open /Applications/sqlworkbench.jar
 
+# alt + tab replacement
 cmd - tab : ~/sources/macos-engineer-tools/scripts/yabai-next-window
+shift + cmd - tab : ~/sources/macos-engineer-tools/scripts/yabai-prev-window
 
 
