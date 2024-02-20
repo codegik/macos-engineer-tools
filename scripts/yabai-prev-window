@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+set -e
+
+yabai -m window --focus stack.prev || yabai -m window --focus stack.last || yabai -m window --focus prev || yabai -m window --focus last
+
+exit 0
+
