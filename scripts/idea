@@ -1,6 +1,17 @@
 #!/bin/zsh
 
-IDEA=`ls -1d /Applications/IntelliJ\ * | tail -n1`
+IDEA=`ls -1d /Applications/IntelliJ* | tail -n1`
+
+if [ -z "$IDEA" ]; then
+  IDEA=`ls -1d $HOME/Applications/IntelliJ* | tail -n1`
+  if [ -z "$IDEA" ]; then
+    echo "IntelliJ not found"
+    exit 1
+  fi
+fi
+
+echo "Found IDEA: $IDEA"
+
 wd=`pwd`
 
 if [ -d "$1" ]; then
