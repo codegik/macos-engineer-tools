@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+set -e
+
+if [ $# -lt 1 ]; then
+  echo ""
+  echo "Error: Branch name is required"
+  echo "Usage: merge <branch-name>"
+  echo ""
+  exit 1
+fi
+
+TARGET_BRANCH=$1
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+echo ""
+echo "==> Checking out to '$TARGET_BRANCH'"
+git checkout $TARGET_BRANCH
+
+echo ""
+echo "==> Pulling '$TARGET_BRANCH'"
+git pull
+
+echo ""
+echo "==> Checking out to '$CURRENT_BRANCH'"
+git checkout $CURRENT_BRANCH
+
+echo ""
+echo "==> Merging '$TARGET_BRANCH' into '$CURRENT_BRANCH'"
+git merge $TARGET_BRANCH
+
+echo ""
+echo "Please use 'git push' to push your changes"

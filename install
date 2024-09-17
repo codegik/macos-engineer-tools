@@ -76,6 +76,7 @@ brew install neovim
 brew install pyenv
 brew install ripgrep
 brew install jdtls
+brew install kotlin-debug-adapter
 
 exit 0
 
