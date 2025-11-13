@@ -1,57 +1,76 @@
 #!/bin/zsh
 
-IDEA=`ls -1d /Applications/IntelliJ* | tail -n1`
+# Try to find IntelliJ IDEA installation directory
+IDEA=$(ls -1d /usr/bin/intellij* 2>/dev/null | tail -n1)
 
 if [ -z "$IDEA" ]; then
-  IDEA=`ls -1d $HOME/Applications/IntelliJ* | tail -n1`
+  IDEA=$(ls -1d "$HOME"/idea* 2>/dev/null | tail -n1)
   if [ -z "$IDEA" ]; then
-    echo "IntelliJ not found"
-    exit 1
+    echo "IntelliJ not found in /opt or $HOME"
+    echo "Trying 'idea' from PATH..."
+    if command -v idea >/dev/null 2>&1; then
+      IDEA="idea"
+    else
+      echo "IntelliJ IDEA not found."
+      exit 1
+    fi
   fi
 fi
 
 echo "Found IDEA: $IDEA"
 
-wd=`pwd`
+# Current working directory
+wd=$(pwd)
 
-if [ -d "$1" ]; then
-    echo "checking for things in the working dir given"
-    wd=$(ls -1d "$1" | head -n1)
+# If an argument was passed, process it
+if [ -n "$1" ]; then
+  if [ -d "$1" ]; then
+      echo "Checking given working directory"
+      wd=$(realpath "$1")
+  elif [ -f "$1" ]; then
+      echo "Opening file '$1'"
+      if [ "$IDEA" = "idea" ]; then
+        idea "$1" &
+      else
+        "$IDEA"/bin/idea.sh "$1" &
+      fi
+      exit 0
+  fi
 fi
 
-if [ -f "$1" ]; then
-    echo "opening '$1'"
-    open -a "$IDEA" "$1"
+# Enter working directory
+pushd "$wd" >/dev/null || exit 1
+
+# Detect project type and open accordingly
+if [ -d ".idea" ]; then
+    echo "Opening IntelliJ project (.idea)"
+    idea . &
+
+elif ls *.ipr >/dev/null 2>&1; then
+    echo "Opening via .ipr project file"
+    idea "$(ls -1 *.ipr | head -n1)" &
+
+elif [ -f "pom.xml" ]; then
+    echo "Importing Maven project (pom.xml)"
+    idea "pom.xml" &
+
+elif [ -f "build.sbt" ]; then
+    echo "Importing SBT project (build.sbt)"
+    idea "build.sbt" &
+
+elif [ -f "project.clj" ]; then
+    echo "Importing Leiningen project (project.clj)"
+    idea "project.clj" &
+
+elif [ -f "Setup.hs" ]; then
+    echo "Importing Haskell project (Setup.hs)"
+    idea "Setup.hs" &
+
 else
-    pushd "$wd" > /dev/null
-
-    if [ -d ".idea" ]; then
-        echo "opening via the .idea dir"
-        open -a "$IDEA" .
-
-    elif [ -f \*.ipr ]; then
-        echo "opening via the project file"
-        open -a "$IDEA" $(ls -1d *.ipr | head -n1)
-
-    elif [ -f pom.xml ]; then
-        echo "importing from pom"
-        open -a "$IDEA" "pom.xml"
-
-    elif [ -f build.sbt ]; then
-        echo "importing scala project from build.sbt"
-        open -a "$IDEA" "build.sbt"
-
-    elif [ -f project.clj ]; then
-        echo "importing clojure project from project.clj"
-        open -a "$IDEA" "project.clj"
-
-    elif [ -f Setup.hs ]; then
-        echo "importing haskell project from Setup.hs"
-        open -a "$IDEA" "Setup.hs"
-
-    else
-        open -a "$IDEA" "$1"
-    fi
-
-    popd > /dev/null
+    echo "Opening directory in IntelliJ"
+    idea "$wd" &
 fi
+
+popd >/dev/null
+
+
